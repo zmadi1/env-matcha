@@ -734,23 +734,28 @@ def profile():
             id = pic['author']
             posts.append(pic['pictures'])
             name = find_id(id)
+            print(name['Interest'])
             interest.append(name['Interest'])
-            
-            users_i = name['Interest'][0].split(',')
+
+            if name['Interest'] != []:
+                users_i = name['Interest'][0].split(',')
             user_k = existing_user['Interest'][0].split(',')
-            for k in users_i:
-                interest_return.append(k)
-           
-            if name['username'] != existing_user['username']:
-                print(len(name['liked']))
-                if existing_user['sexualPreference'] == name['gender']:
-                    for i in users_i:
-                        for k in user_k:
-                            if i == k:
-                                if name in users:
-                                    continue
-                                else:
-                                    users.append(name)
+            if name['Interest'] != []:
+                for k in users_i:
+                    interest_return.append(k)
+
+
+            if name['Interest'] != []:
+                if name['username'] != existing_user['username']:
+                    print(len(name['liked']))
+                    if existing_user['sexualPreference'] == name['gender']:
+                        for i in users_i:
+                            for k in user_k:
+                                if i == k:
+                                    if name in users:
+                                        continue
+                                    else:
+                                        users.append(name)
         
             
         interest_return = list(dict.fromkeys(interest_return))
